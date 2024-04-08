@@ -29,7 +29,6 @@ export class todoList implements todo {
 
     //Markerar todos som klara (överstrukna)
     markTodoCompleted(todoIndex: number): void {
-
     } 
 
     //hämtar listan med todos

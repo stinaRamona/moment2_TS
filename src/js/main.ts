@@ -1,5 +1,6 @@
 //används för att skriva ut till DOM 
 import { todoList } from "./classes";
+ 
 
 //hämtar element 
 let submitBtnEl = document.getElementById("submitBtn") as HTMLButtonElement; 
@@ -23,13 +24,29 @@ function addTodo() : void {
 
 
     if(todoString && todoPrio) {
-        const newTodo = new todoList(todoString, completed, todoPrioNum)
-        todoList.addTodo(newTodo); //vill skicka till addTodo metoden i klassen. Verkar inte komma dit
+        
+        let todoInstance = new todoList(todoString, completed, todoPrioNum); 
+
+        todoInstance.addTodo(todoString, todoPrioNum); //vill skicka till addTodo metoden i klassen. Verkar inte komma dit
 
         printTodo();
     }
 }
 
 function printTodo(): void {
-    // skriver ut todosen till listan 
+    //hämtar diven där todosen ska skrivas ut
+    let todoListDiv = document.getElementById("todoListDiv"); 
+
+    todoList.todos.forEach(todo => { //vill komma åt arrayen i TodoList 
+        let todoItem = document.createElement("article"); 
+        todoItem.textContent = todo.task; 
+        document.createElement("button") 
+
+        if (todo.conpleted){
+            todoItem.style.textDecoration ="line-through"
+        }
+
+        todoListDiv?.appendChild(todoItem); 
+    });
+
 }
