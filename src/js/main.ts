@@ -21,7 +21,7 @@ function addTodo() : void {
     let todoPrio = todoPrioEl.value;
     let todoPrioNum = parseInt(todoPrio); //gör om sträng till numeriskt värde  
     let completed = false; 
-
+    
 
     if(todoString && todoPrio) {
         
