@@ -142,14 +142,14 @@
       this[globalName] = mainExports;
     }
   }
-})({"1v14V":[function(require,module,exports) {
+})({"3L0Bc":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "7055c94b59712999";
+module.bundle.HMR_BUNDLE_ID = "9f8c1bcd90c5fab6";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -583,8 +583,141 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     });
 }
 
-},{}],"4M6V8":[function(require,module,exports) {
+},{}],"hYrgI":[function(require,module,exports) {
+//används för att skriva ut till DOM 
+var _classes = require("./classes");
+window.onload = printTodo;
+//instans av todoList skapas
+let newTodo = new (0, _classes.todoList)();
+//hämtar element (Alla element flyttade utanför funktionerna)
+let submitBtnEl = document.getElementById("submitBtn");
+let todoInputEl = document.getElementById("todoInput");
+let todoPrioEl = document.getElementById("todoPrio");
+let todoListDivEl = document.getElementById("todoListDiv"); //Div där todosen skrivs ut
+//eventlyssnare på submitbtn för att få ut värden från formuläret
+submitBtnEl.addEventListener("click", function() {
+    // Hämta värdena från input-fälten
+    const todoString = todoInputEl.value;
+    const todoPrioNum = parseInt(todoPrioEl.value);
+    // Lägg till en ny todo i TodoList-instansen
+    if (todoString && !isNaN(todoPrioNum)) {
+        const added = newTodo.addTodo(todoString, todoPrioNum);
+        if (added) // Uppdatera listan över todos
+        printTodo();
+        else // Hantera felaktig inmatning
+        console.error("Felaktig inmatning f\xf6r att l\xe4gga till todo.");
+    }
+});
+function printTodo() {
+    //resnar listan 
+    todoListDivEl.innerHTML = "";
+    newTodo.getTodos().forEach((todo)=>{
+        //skapar article-element för var todo 
+        let todoItem = document.createElement("article");
+        todoItem.textContent = todo.task;
+        //skapar en button efter varje task 
+        let complBtn = document.createElement("button");
+        complBtn.textContent = "F\xe4rdig";
+        //eventlyssnare till knappen skickas till ifcompleted metoden i klassen
+        complBtn.addEventListener("click", function() {
+            newTodo.markTodoCompleted(newTodo.getTodos().indexOf(todo));
+            printTodo();
+        });
+        if (todo.completed) todoItem.style.textDecoration = "line-through";
+        todoItem.appendChild(complBtn);
+        todoListDivEl.appendChild(todoItem);
+    });
+}
 
-},{}]},["1v14V","4M6V8"], "4M6V8", "parcelRequirecfaf")
+},{"./classes":"kSgtU"}],"kSgtU":[function(require,module,exports) {
+//klass skapas 
+//importerar interface från filen ifTodo 
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "todoList", ()=>todoList);
+class todoList {
+    //konstruktor som hämtar array från local storage 
+    constructor(){
+        //tom array för att spara todoItems i 
+        this.todos = [];
+        this.loadFromLocalStorage();
+    }
+    //metoder för klassen:
+    //lägger till todo om inmantningen är korrekt. 
+    addTodo(task, priority) {
+        if (priority === 1 || priority === 2 || priority === 3 && task != "") {
+            //skapa ny todo 
+            const newTodo = {
+                task: task,
+                completed: false,
+                priority: priority
+            };
+            //pusha till arrayen
+            this.todos.push(newTodo);
+            //spara till localStorage (kallar på funktionen)
+            this.saveToLocalStorage();
+            return true;
+        } else return false;
+    }
+    //Markerar todos som klara (överstrukna)
+    markTodoCompleted(todoIndex) {
+        //kontrollerar ifall todoIndex är större än eller lika med 0 och mindre än längden på arrayen av todos
+        if (todoIndex >= 0 && todoIndex < this.todos.length) {
+            //sätter completed till true om det är sant
+            this.todos[todoIndex].completed = true;
+            //sparar i local storage (kallar på funktionen)
+            this.saveToLocalStorage();
+        }
+    //knappen returnerar indexet. kallar på denna metod - skapas i main
+    }
+    //hämtar listan med todos
+    getTodos() {
+        //returnera arrayen. 
+        return this.todos;
+    }
+    //Sparar till local storage 
+    saveToLocalStorage() {
+        //spara arrayen i local storage 
+        localStorage.setItem("todoItems", JSON.stringify(this.todos));
+    }
+    //Laddar todos från local storage 
+    loadFromLocalStorage() {
+        //ladda in från local stroage till arrayen. 
+        let storedItems = localStorage.getItem("todoItems");
+        if (storedItems) this.todos = JSON.parse(storedItems);
+    }
+}
 
-//# sourceMappingURL=Moment2TS.59712999.js.map
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || Object.prototype.hasOwnProperty.call(dest, key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}]},["3L0Bc","hYrgI"], "hYrgI", "parcelRequirecfaf")
+
+//# sourceMappingURL=index.90c5fab6.js.map

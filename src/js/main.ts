@@ -1,3 +1,5 @@
+window.onload = printTodo;
+
 //används för att skriva ut till DOM 
 import { todoList } from "./classes";
 
@@ -11,30 +13,25 @@ let todoPrioEl = document.getElementById("todoPrio") as HTMLInputElement;
 let todoListDivEl = document.getElementById("todoListDiv") as HTMLElement; //Div där todosen skrivs ut
 
 //eventlyssnare på submitbtn för att få ut värden från formuläret
-submitBtnEl.addEventListener('click', function(event){
-    event.preventDefault(); 
+submitBtnEl.addEventListener('click', function(){ 
 
-    addTodo(); 
-}) 
+    // Hämta värdena från input-fälten
+    const todoString = todoInputEl.value;
+    const todoPrioNum = parseInt(todoPrioEl.value);
 
-
-function addTodo() : void { 
-    //hämtar värden från formulär
-    let todoString = todoInputEl.value; 
-    let todoPrio = todoPrioEl.value;
-    let todoPrioNum = parseInt(todoPrio); //gör om sträng till numeriskt värde   
-
-    if(todoString && todoPrio) {
-
-        let added = newTodo.addTodo(todoString, todoPrioNum); 
-
-        if (added){
-            printTodo(); 
+    // Lägg till en ny todo i TodoList-instansen
+    if (todoString && !isNaN(todoPrioNum)) {
+        const added = newTodo.addTodo(todoString, todoPrioNum);
+        if (added) {
+            // Uppdatera listan över todos
+            printTodo();
         } else {
-            console.error("Vänligen skriv i korrekta värden")
+            // Hantera felaktig inmatning
+            console.error('Felaktig inmatning för att lägga till todo.');
         }
-    }
-}
+    } 
+});
+
 
 function printTodo(): void {
     
@@ -64,6 +61,4 @@ function printTodo(): void {
         todoListDivEl.appendChild(todoItem); 
     });
 
-} 
-
-window.onload = printTodo; 
+}  

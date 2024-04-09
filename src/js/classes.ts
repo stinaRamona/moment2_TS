@@ -66,7 +66,7 @@ export class todoList {
         let storedItems = localStorage.getItem('todoItems')
 
         if (storedItems) {
-            return JSON.parse(storedItems)
+            this.todos = JSON.parse(storedItems)
         }  
     }
 } 
