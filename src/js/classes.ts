@@ -1,56 +1,72 @@
 //klass skapas 
 
 //importerar interface från filen ifTodo 
-import {todo} from './ifTodo.ts'; 
+import {Todo} from './ifTodo.ts'; 
 
-export class todoList implements todo {
-    task: string;
-    completed: boolean;
-    priority: number;  
+export class todoList {
+  //tom array för att spara todoItems i 
+    private todos: Todo[] = [];
 
-    //konstrukorn ska hämta listan från local storage. 
-    constructor(task: string, completed:boolean, priority:number){
-        this.task = task; 
-        this.completed = false; 
-        this.priority = priority; 
+    //konstruktor som hämtar array från local storage 
+    constructor() {
+        this.loadFromLocalStorage();
     }
-    todos = []; //tom array för todosen att sparas i
     
     //metoder för klassen:
     
     //lägger till todo om inmantningen är korrekt. 
-    addTodo(task:string, priority:number): boolean {
-        if (priority === 1 || priority === 2 || priority === 3 && task != "") { //"om prio är 1-3 och textsträngen inte är tom"
-            //funktionen lägger till en todo till arrayen från formuläret
-            //pusha till arrayen 
+    addTodo(task: string, priority:number): boolean {
+        if (priority === 1 || priority === 2 || priority === 3 && task != "") { 
+            //skapa ny todo 
+            const newTodo: Todo = { task: task, completed: false, priority: priority}; 
+
+            //pusha till arrayen
+            this.todos.push(newTodo);
+
+            //spara till localStorage (kallar på funktionen)
+            this.saveToLocalStorage(); 
+
             return true; 
+
         } else { 
             return false; 
         }
-
     }; 
 
     //Markerar todos som klara (överstrukna)
     markTodoCompleted(todoIndex: number): void {
-        //todoIndex = index på todos[] 
-        //knappen returnerar indexet. kallar på denna metod. 
-        //Completed = true. Style läggs in i main.ts
+        //kontrollerar ifall todoIndex är större än eller lika med 0 och mindre än längden på arrayen av todos
+        if (todoIndex >= 0 && todoIndex < this.todos.length) {
+
+            //sätter completed till true om det är sant
+            this.todos[todoIndex].completed = true; 
+
+            //sparar i local storage (kallar på funktionen)
+            this.saveToLocalStorage(); 
+        }
+        //knappen returnerar indexet. kallar på denna metod - skapas i main
+
     } 
 
     //hämtar listan med todos
     getTodos(): Todo[] {
         //returnera arrayen. 
+        return this.todos;  
     }
 
     //Sparar till local storage 
     saveToLocalStorage(): void {
         //spara arrayen i local storage 
+        localStorage.setItem('todoItems', JSON.stringify(this.todos))
     } 
 
     //Laddar todos från local storage 
     loadFromLocalStorage(): void {
         //ladda in från local stroage till arrayen. 
-        //window onload. get item. osv 
-    }
+        let storedItems = localStorage.getItem('todoItems')
 
+        if (storedItems) {
+            return JSON.parse(storedItems)
+        }  
+    }
 } 

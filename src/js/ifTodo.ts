@@ -1,6 +1,6 @@
 //Interface för todosen 
 
-export interface todo {
+export interface Todo {
     task: string;
     completed: boolean;
     priority: number;
