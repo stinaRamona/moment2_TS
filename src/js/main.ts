@@ -11,6 +11,7 @@ let submitBtnEl = document.getElementById("submitBtn") as HTMLButtonElement;
 let todoInputEl = document.getElementById("todoInput") as HTMLInputElement; 
 let todoPrioEl = document.getElementById("todoPrio") as HTMLInputElement; 
 let todoListDivEl = document.getElementById("todoListDiv") as HTMLElement; //Div där todosen skrivs ut
+let errorEl = document.getElementById("error") as HTMLElement
 
 //eventlyssnare på submitbtn för att få ut värden från formuläret
 submitBtnEl.addEventListener('click', function(){ 
@@ -27,7 +28,7 @@ submitBtnEl.addEventListener('click', function(){
             printTodo();
         } else {
             // Hantera felaktig inmatning
-            console.error('Felaktig inmatning för att lägga till todo.');
+            errorEl.innerHTML = "Skriv i korrekta värden i fälten"
         }
     } 
 });

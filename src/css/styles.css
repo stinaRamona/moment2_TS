@@ -1,0 +1,94 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(253, 247, 239);
+    margin:0; 
+}
+
+main {
+    width: 35%; 
+    margin: 0 auto; 
+    background-color: rgb(255, 255, 158); 
+}
+
+nav {
+    background-color: rgb(252, 229, 28);
+    margin:0; 
+    padding: 1%;  
+}
+/*Formulär*/
+form { 
+    font-size: 1.25em;
+    margin:2%;  
+} 
+
+label {
+    font-weight: bold;
+}
+
+#todoInput {
+    border-radius: 4px;
+    padding: 1.5%; 
+    border: 1px solid #888888;  
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
+    width: 300px; 
+}
+
+#todoPrio {
+    border-radius: 4px;
+    width: 50px; 
+    padding: 1.5%;
+    border: 1px solid #888888;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);  
+}
+
+h2 {
+    margin: 2%; 
+}
+
+/*footer*/
+footer {
+    text-align: center;
+    font-size: 1.10em;
+    background-color: rgb(252, 229, 28);
+    margin:0; 
+    padding: 1%; 
+} 
+
+/*div där listorna skrivs ut*/
+#todoListDiv {
+    font-size: 1.25em; 
+    margin: 2%; 
+    margin-top: 50px; 
+} 
+
+/*knapparna*/
+button {
+    margin: 2%; 
+    background-color: rgba(4, 114, 0, 0.788);
+    color: white; 
+    padding: 1%; 
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 255, .2);
+    cursor: pointer;
+} 
+
+button:hover {
+    background-color: rgb(4, 114, 0);
+}
+
+/*error*/
+
+#error {
+    color: red;
+    font-weight: bold; 
+}
+
+@media (max-width: 1290px) {
+    main {
+        width:80%; 
+    }
+
+    #todoinput {
+        width: 200px; 
+    }
+}

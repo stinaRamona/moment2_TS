@@ -1,0 +1,89 @@
+body {
+  background-color: #fdf7ef;
+  margin: 0;
+  font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main {
+  background-color: #ffff9e;
+  width: 35%;
+  margin: 0 auto;
+}
+
+nav {
+  background-color: #fce51c;
+  margin: 0;
+  padding: 1%;
+}
+
+form {
+  margin: 2%;
+  font-size: 1.25em;
+}
+
+label {
+  font-weight: bold;
+}
+
+#todoInput {
+  border: 1px solid #888;
+  border-radius: 4px;
+  width: 300px;
+  padding: 1.5%;
+  box-shadow: 2px 2px 2px 1px #00f3;
+}
+
+#todoPrio {
+  border: 1px solid #888;
+  border-radius: 4px;
+  width: 50px;
+  padding: 1.5%;
+  box-shadow: 2px 2px 2px 1px #00f3;
+}
+
+h2 {
+  margin: 2%;
+}
+
+footer {
+  text-align: center;
+  background-color: #fce51c;
+  margin: 0;
+  padding: 1%;
+  font-size: 1.1em;
+}
+
+#todoListDiv {
+  margin: 50px 2% 2%;
+  font-size: 1.25em;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  background-color: #047200c9;
+  border-radius: 4px;
+  margin: 2%;
+  padding: 1%;
+  box-shadow: 2px 2px 2px 1px #00f3;
+}
+
+button:hover {
+  background-color: #047200;
+}
+
+#error {
+  color: red;
+  font-weight: bold;
+}
+
+@media (width <= 1290px) {
+  main {
+    width: 80%;
+  }
+
+  #todoinput {
+    width: 200px;
+  }
+}
+/*# sourceMappingURL=index.77a9bc14.css.map */

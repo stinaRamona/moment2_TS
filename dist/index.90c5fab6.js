@@ -594,6 +594,7 @@ let submitBtnEl = document.getElementById("submitBtn");
 let todoInputEl = document.getElementById("todoInput");
 let todoPrioEl = document.getElementById("todoPrio");
 let todoListDivEl = document.getElementById("todoListDiv"); //Div där todosen skrivs ut
+let errorEl = document.getElementById("error");
 //eventlyssnare på submitbtn för att få ut värden från formuläret
 submitBtnEl.addEventListener("click", function() {
     // Hämta värdena från input-fälten
@@ -605,7 +606,7 @@ submitBtnEl.addEventListener("click", function() {
         if (added) // Uppdatera listan över todos
         printTodo();
         else // Hantera felaktig inmatning
-        console.error("Felaktig inmatning f\xf6r att l\xe4gga till todo.");
+        errorEl.innerHTML = "Skriv i korrekta v\xe4rden i f\xe4lten";
     }
 });
 function printTodo() {
